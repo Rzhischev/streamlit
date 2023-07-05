@@ -7,7 +7,7 @@ import streamlit as st
 st.write("""
 # Простое приложение для отслеживания акций
 
-На графике редставлены **цена закрытия** и ***объём*** торгов по акциям Apple!
+На графике представлены **цена закрытия**, ***объём*** торгов и другие ключевые метрики по акциям Apple!
 
 """)
 
@@ -17,8 +17,20 @@ tickerSymbol = 'AAPL'
 tickerData = yf.Ticker(tickerSymbol)
 #get the historical prices for this ticker
 tickerDf = tickerData.history(period='1d', start='2010-7-3', end=None)
-# Open	High	Low	Close	Volume	Dividends	Stock Splits
+#				Stock Splits
 
+st.write("""
+## Минимальная цена
+""")
+st.line_chart(tickerDf.Low)
+st.write("""
+## Максимальная цена
+""")
+st.line_chart(tickerDf.High)
+st.write("""
+## Цена открытия
+""")
+st.line_chart(tickerDf.Open)
 st.write("""
 ## Цена закрытия
 """)
